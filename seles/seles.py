@@ -21,7 +21,7 @@ def manu_seles(products,previous_transactions):
         if choose=="2":
             adding_products(products,shopping_cart)
         if choose=="3":
-            quantity(products,shopping_cart)
+            discount =quantity(products,shopping_cart)
         if choose=="4":
             removing_product(shopping_cart) 
         if choose=="5":
@@ -29,7 +29,7 @@ def manu_seles(products,previous_transactions):
         if choose=="6":
              possibility_of_discount(shopping_cart)
         if choose=="7":       
-             execution(shopping_cart,)
+             execution(previous_transactions,shopping_cart,products,discount)
         if choose=="8":
              return
              
@@ -114,11 +114,32 @@ def possibility_of_discount(shopping_cart):
 
 
              
-def execution(previous_transactions,shopping_cart):
+def execution(previous_transactions,shopping_cart,products,discount):
     if len(shopping_cart)==0:
          return "There are no products in the cart"
+    for i in shopping_cart:
+         for t in products:
+            if i["name"]==t["name"] and i["quantity"]>t["stock"]:
+                print("out of stock")
+                return
+    toatal=0         
+    for i in shopping_cart:
+             for t in products:
+                if i["name"]==t["name"]:
+                   t["stock"]-=i["quantity"]
+                   toatal+=i["total"]
+    if discount == 0:
+         discount==toatal
+         
+    sale = {
+        "id": len(previous_transactions) + 1,
+        "items": list(shopping_cart),
+        "subtotal": toatal,
+        "discount": toatal - discount,
+        "total": discount
 
+    }
+    previous_transactions.append(sale)
+    shopping_cart.clear()
 
-
-    previous_transactions.appens()
      
