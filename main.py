@@ -26,7 +26,7 @@ def main():
         if choose=="3":
             s.manu_seles(products,previous_transactions)
         if choose=="4":
-            r.manu_reports()
+            r.manu_reports(previous_transactions,products)
         if choose=="5":
             print("Thank you for shopping with us")
             break
